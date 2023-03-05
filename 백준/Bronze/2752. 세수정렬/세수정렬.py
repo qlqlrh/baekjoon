@@ -1,6 +1,5 @@
 a, b, c = map(int, input().split())
 d = 0
-
 while (1):
     if a > b:
         d = b
@@ -12,5 +11,4 @@ while (1):
         b = d
     if a < b:
         break
-    
 print(a, b, c)
