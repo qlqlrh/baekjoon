@@ -30,27 +30,21 @@ int calRepaintW(int x, int y) { // 가로 끝, 세로 끝
 }
 
 int main() {
-
-    // 1. 입력 받기
     cin >> N >> M;
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= M; j++)
             cin >> chess[i][j];
     }
 
-    if (N == 8 && M == 8)
-        cout << min(calRepaintB(8, 8), calRepaintW(8, 8)) << endl;
-    else {
-        int minVal = INF;
-        for (int i = 8; i <= N; i++) {
-            for (int j = 8; j <= M; j++) {
-                int num = min(calRepaintB(i, j), calRepaintW(i, j));
-                if (minVal > num)
-                    minVal = num;
-            }
+    int minVal = INF;
+    for (int i = 8; i <= N; i++) {
+        for (int j = 8; j <= M; j++) {
+            int num = min(calRepaintB(i, j), calRepaintW(i, j));
+            if (minVal > num)
+                minVal = num;
         }
-        cout << minVal << endl;
     }
+    cout << minVal << endl;
 }
 
 // ** 정답의 형태가 딱 2개로 정해져 있음
