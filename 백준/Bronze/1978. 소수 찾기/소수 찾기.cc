@@ -1,5 +1,11 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
+
+/** 수정사항
+ * 1. 입력되는 숫자는 1000까지지만, sqrt(num)까지만 검사해도 소수 판별 가능
+ *    즉, num=36이라면, 2부터 6까지만 나눠보면 된다는 뜻
+ */
 
 int main() {
     int N; // 최대 100
@@ -11,16 +17,18 @@ int main() {
     for (int i = 0; i < N; i++) {
         cin >> num;
 
-        int j;
-        for (j = 2; j <= 1000; j++) {
-            if (num == 1)
-                break;
-            if ((num != j) && (num % j == 0)) { // 자기 자신이 아닌 배수가 있는 경우 -> 소수X
+        if (num == 1)
+            continue;
+
+        bool isPrime = true;
+        for (int j = 2; j <= sqrt(num); j++) {
+            if (num % j == 0) { // 자기 자신이 아닌 배수가 있는 경우 -> 소수X
+                isPrime = false;
                 break;
             }
         }
 
-        if (j >= 1000) {
+        if (isPrime) {
             cnt++;
         }
     }
