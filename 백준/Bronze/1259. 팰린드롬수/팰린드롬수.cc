@@ -9,20 +9,21 @@ using namespace std;
 int main() {
 
     while (true) {
-        string num;
+        int num;
         cin >> num;
 
-        if (num == "0") break;
+        if (num == 0) break;
 
-        int len = num.length();
-        string isPalin = "yes";
-        for (int i = 0; i < len/2; i++) {
-            if (num[i] != num[len-1-i]) {
-                isPalin = "no";
+        string numStr = to_string(num);
+        int len = numStr.length();
+        bool isPalin = true;
+        for (int i = 0; i < len / 2; i++) {
+            if (numStr[i] != numStr[len - 1 - i]) {
+                isPalin = false;
                 break;
             }
         }
 
-        cout << isPalin << endl;
+        cout << (isPalin ? "yes" : "no") << endl;
     }
 }
