@@ -3,46 +3,45 @@
 using namespace std;
 
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
 
     int N; // 명령의 수
     cin >> N;
 
-    vector<int> v;
+    stack<int> stk;
     for (int i = 0; i < N; i++) {
         string command;
-        int num;
         cin >> command;
 
         if (command == "push") {
+            int num;
             cin >> num;
-            v.push_back(num);
-        }
-
-        else if (command == "pop") {
-            if (!v.empty()) {
-                cout << v.back() << endl;
-                v.pop_back();
-            } else {
-                cout << "-1\n";
-            }
-        }
-
-        else if (command == "size") {
-            cout << v.size() << endl;
-        }
-
-        else if (command == "empty") {
-            if (v.empty()) cout << "1\n";
-            else           cout << "0\n";
+            stk.push(num);
         }
 
         if (command == "top") {
-            if (v.empty()) cout << "-1\n";
-            else           cout << v.back() << endl;
+            int top = -1;
+            if (stk.size() != 0) {
+                top = stk.top();
+            }
+            cout << top << "\n";
+        }
+        if (command == "size")
+            cout << stk.size() << "\n";
+
+        if (command == "empty") {
+            int result = (stk.size() == 0) ? 1 : 0;
+            cout << result << "\n";
+        }
+
+        if (command == "pop") {
+            int top = -1;
+            if (stk.size() != 0) {
+                top = stk.top();
+                stk.pop();
+            }
+            cout << top << "\n";
         }
     }
-
-    return 0;
 }
