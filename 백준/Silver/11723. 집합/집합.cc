@@ -6,46 +6,38 @@ int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
 
-    set<int> numbers;
     int M; // 수행해야 하는 연산의 수
     cin >> M;
 
+    int mask = 0;
     for (int i = 0; i < M; i++) {
         string command;
+        int number;
         cin >> command;
         if (command == "add") {
-            int number;
             cin >> number;
-            numbers.insert(number);
+            mask |= ( 1 << (number-1) );
         }
         else if (command == "remove") {
-            int number;
             cin >> number;
-            numbers.erase(number);
+            mask &= ~( 1 << (number-1) );
         }
         else if (command == "check") {
-            int number;
             cin >> number;
-            if (numbers.find(number) != numbers.end()) {
+            if (mask & (1 << (number-1))) {
                 cout << "1\n";
             }
             else { cout << "0\n"; }
         }
         else if (command == "toggle") {
-            int number;
             cin >> number;
-            if (numbers.find(number) != numbers.end()) {
-                numbers.erase(number);
-            }
-            else { numbers.insert(number); }
+            mask ^= ( 1 << (number-1) );
         }
         else if (command == "all") {
-            numbers
-                    = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                        11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+            mask = 0b11111111111111111111;
         }
         else if (command == "empty") {
-            numbers.clear();
+            mask = 0;
         }
     }
 }
