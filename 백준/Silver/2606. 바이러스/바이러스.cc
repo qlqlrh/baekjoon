@@ -16,7 +16,6 @@ int main() {
 
     vector<vector<int>> v(N + 1);
     vector<bool> vis(N + 1);
-    fill(vis.begin(), vis.end(), 0);
 
     for (int i = 0; i < M; i++) {
         int a, b;
@@ -30,23 +29,20 @@ int main() {
     int cnt = 0;
     queue<int> q;
     vis[1] = true;
-    for (int node : v[1]) {
-        q.push(node);
-    }
+    q.push(1);
 
     while (!q.empty()) {
         int cur = q.front();
         q.pop();
 
-        if (vis[cur]) { // 이미 방문한 노드
-            continue;
-        }
-        else { // 방문 안 한 노드
-            cnt++;
-            vis[cur] = true;
-            for (int node : v[cur]) {
-                if (!vis[node]) // 방문 안 한 노드만 push
-                    q.push(node);
+        for (int node : v[cur]) {
+            if (vis[node]) { // 이미 방문한 노드
+                continue;
+            }
+            else { // 방문 안 한 노드만 push
+                cnt++;
+                vis[node] = true;    
+                q.push(node);
             }
         }
     }
