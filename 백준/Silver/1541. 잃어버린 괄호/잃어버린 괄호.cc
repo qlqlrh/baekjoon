@@ -19,15 +19,11 @@ int main() {
     string inp;
     cin >> inp;
 
-    vector<bool> used(51, true);
     string number = "";
     for (char c : inp) {
         if (isdigit(c)) {
             number += c;
         } else {
-            if (c == '-') {
-                used[signs.size()] = false;
-            }
             signs.push_back(c);
             numbers.push_back(stoi(number));
             number = "";
@@ -35,34 +31,12 @@ int main() {
     }
     numbers.push_back(stoi(number));
 
-    // listp(numbers);
-    // cout << "\n";
-    // listp(signs);
-    // cout << "\n";
-    // listp(used);
-    // cout << "\n";
-
     // 메인 로직
     int D[51];
     D[0] = numbers[0];
     for (int i = 1; i < numbers.size(); i++) {
-        // // 사용 안 한 마이너스 남아있음
-        // int flag = false;
-        // for (int j = 1; j <= i; j++) {
-        //     if (used[j] == false) {
-        //         if (j != i) {
-        //             used[j] = true;
-        //         }
-        //         D[i] = D[i-1] - numbers[i];
-        //         flag = true;
-        //         break;
-        //     }
-        // }
-        //
-        // if (!flag) {
-        //     D[i] = D[i-1] + numbers[i];
-        // }
-        if (signs[i] == '-') D[i] = D[i-1] - numbers[i];
+        if (signs[i] == '-')
+	        D[i] = D[i-1] - numbers[i];
         else {
             D[i] = D[i-1] + numbers[i];
             // +인 경우, 앞에 - 가 있으면 - 가능
@@ -74,8 +48,6 @@ int main() {
             }
         }
     }
-
-    // listp(D);
 
     cout << D[numbers.size() - 1] << "\n";
 }
