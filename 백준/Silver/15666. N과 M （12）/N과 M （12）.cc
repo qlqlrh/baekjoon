@@ -1,30 +1,28 @@
 #include <bits/stdc++.h>
-#define pn(x) cout << x << "\n";
-#define listPn(x) for (auto y : x) cout << y << " " ; cout << "\n";
-
 using namespace std;
-
-// 유형 : 백트래킹
 
 int N, M;
 vector<int> v;
 vector<int> result;
-set<vector<int>> final;
 
-void backtrack() {
+void backtrack(int start) {
     if (result.size() == M) {
-        // listPn(result);
-        final.insert(result);
+        for (int i = 0; i < M; i++) {
+            cout << result[i] << " ";
+        }
+        cout << "\n";
         return;
     }
 
-    for (int i = 0; i < N; i++) {
-        // 예외 조건 (앞에 있는 것보다 작은 건 push 불가)
-        if (!result.empty() && (v[i] < result.back())) continue;
-
+    int prev = -1;  // 같은 depth에서 이전에 선택한 값
+    for (int i = start; i < N; i++) {
+        if (prev == v[i]) continue;  // 같은 depth에서 같은 숫자 스킵
+        
         result.push_back(v[i]);
-        backtrack();
+        backtrack(i);  // 중복 선택 허용이므로 i부터 시작
         result.pop_back();
+        
+        prev = v[i];
     }
 }
 
@@ -37,9 +35,9 @@ int main() {
     for (int i = 0; i < N; i++) cin >> v[i];
 
     sort(v.begin(), v.end());
-    backtrack();
-
-    for (auto vec : final) {
-        listPn(vec);
-    }
+    // 입력 중복 제거 (선택사항이지만 효율적)
+    v.erase(unique(v.begin(), v.end()), v.end());
+    N = v.size();
+    
+    backtrack(0);
 }
