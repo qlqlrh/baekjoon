@@ -1,0 +1,8 @@
+import sys
+from collections import deque
+N = int(input())
+data = list(map(int, input().split()))
+sum_val = sum(data)
+
+result = oct(sum_val)[2:]
+print(result)
