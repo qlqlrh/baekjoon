@@ -1,0 +1,72 @@
+"""
+구현?
+rotate => deque
+"""
+from collections import deque
+		
+answer = input()
+inp = input()
+result = [5] * 4
+
+inp_list = []
+answer_list = []
+for i in range(4):
+	inp_list.append(int(inp[i]))
+	answer_list.append(int(answer[i]))
+
+def check():
+	for i in range(4):		
+		if inp_list[i] == answer_list[i]:
+			result[i] = 1 # Strike
+		elif inp_list[i] in answer_list:
+			result[i] = 0 # "Ball"
+		else:
+			result[i] = -1 # "Fail"
+
+
+def move(): # result[i]가 1인 거 빼고, inp[i] 값들 오른쪽으로 한 칸 이동
+	not_strike = []
+	for i in range(4):
+		if result[i] != 1:
+			not_strike.append(i)
+
+	# Strike 아닌 애들끼리만 이동
+	legth = len(not_strike)
+	if legth == 2:
+		temp = inp_list[not_strike[1]]
+		inp_list[not_strike[1]] = inp_list[not_strike[0]]
+		inp_list[not_strike[0]] = temp
+		
+	elif legth == 3:
+		temp = inp_list[not_strike[2]]
+		inp_list[not_strike[2]] = inp_list[not_strike[1]]
+		inp_list[not_strike[1]] = inp_list[not_strike[0]]
+		inp_list[not_strike[0]] = temp
+	else:
+		temp = inp_list[3]
+		inp_list[3] = inp_list[2]
+		inp_list[2] = inp_list[1]
+		inp_list[1] = inp_list[0]
+		inp_list[0] = temp
+
+cnt = 1
+while True:
+	check()
+	
+	if sum(result) == 4:
+		break
+
+	for i in range(4):
+		if result[i] == -1:
+			iter = 1
+			while True:
+				num = (int(inp_list[i]) + iter) % 10
+				if num not in inp_list:
+					inp_list[i] = num
+					break
+				iter += 1
+	if any(result[i] == 0 for i in range(4)):
+			move()
+	cnt += 1
+
+print(cnt)
