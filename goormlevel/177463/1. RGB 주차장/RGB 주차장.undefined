@@ -1,0 +1,19 @@
+"""
+DP
+dp[i] : i개의 칸을 칠할 수 있는 경우의 수
+dp[i] = dp[i - 1] * 2?
+R G
+R B
+G R
+G B
+B R
+B G
+"""
+
+N = int(input())
+dp = [0, 3]
+
+for i in range(2, N + 1):
+	dp.append((dp[i - 1] * 2) % 100000007)
+
+print(dp[N])
