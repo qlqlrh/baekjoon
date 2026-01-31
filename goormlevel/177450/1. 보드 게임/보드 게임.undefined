@@ -1,0 +1,21 @@
+"""
+1차원, N+1 배열
+x => x + 1 or x + 3 만 이동 가능
+0번에서 출발해서 N번까지 갈 수 있는 이동 경로의 개수
+
+BFS => 시간초과 뜸
+- 가지치기 더 필요한 듯? (지금은, 2^N 이라..)
+
+DP다!!!!
+dp[i] : i번칸까지 올 수 있는 경우의 수
+dp[i] = dp[i-1] + dp[i-3]
+"""
+
+from collections import deque
+N = int(input())
+
+dp = [1, 1, 1]
+for i in range(3, N + 1):
+	dp.append((dp[i-1] % 1000000007 + dp[i-3] % 1000000007)% 1000000007)
+
+print(dp[N])
