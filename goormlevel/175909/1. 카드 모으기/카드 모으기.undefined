@@ -1,0 +1,17 @@
+"""
+set에 다 넣고, 최종 set의 len이 N이 아니면 -1, N이면 그때의 i 출력
+len 매서드가 시간복잡도가 뭐였더라
+"""
+import sys
+input = sys.stdin.readline
+N, M = map(int, input().split())
+s = set()
+
+# print(dir(set()))
+for i in range(1, M + 1):
+	s.add(int(input().rstrip()))
+	if len(s) == N:
+		print(i)
+		exit(0)
+
+print("-1")
