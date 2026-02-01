@@ -1,0 +1,17 @@
+"""
+구현
+- 현의 정리
+- AM * BM = CM * DM
+"""
+import math
+
+AM, CM, BM = map(int, input().split())
+
+DM_up = AM * BM
+DM_down = CM
+g = math.gcd(DM_up, DM_down)
+DM_up  = DM_up // g
+DM_down = DM_down // g
+
+print(DM_up, DM_down)
+	
