@@ -14,11 +14,16 @@ def solution(begin, target, words):
 
     def diff(a, b):
         cnt = 0
-        for i in range(len(a)):
-            if a[i] != b[i]:
+        for aa, bb in zip(a, b):
+            if aa != bb:
                 cnt += 1
             if cnt >= 2:
                 return False
+        # for i in range(len(a)):
+        #     if a[i] != b[i]:
+        #         cnt += 1
+        #     if cnt >= 2:
+        #         return False
         return True
 
     while q:
