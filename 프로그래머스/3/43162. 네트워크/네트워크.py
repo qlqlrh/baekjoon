@@ -1,25 +1,24 @@
-# 컴포넌트 개수 세기 (not 격자 BFS, Graph 문제!!)
-
+# BFS (격자X, 그래프)
 from collections import deque
 
 def solution(n, computers):
     answer = 0
     visit = [False] * n
     
-    q = deque()
     for i in range(n):
         if visit[i]:
             continue
-            
-        q.append(i)
+        if computers[i] == 0:
+            continue
+        q = deque([i])
         visit[i] = True
-        answer += 1
         
         while q:
-            u = q.popleft()
+            u = q.pop()
             for v in range(n):
-                if computers[u][v] == 1 and visit[v] == False:
-                    visit[v] = True
+                if visit[v] != True and computers[u][v]:
                     q.append(v)
-        
+                    visit[v] = True
+        answer += 1
+
     return answer
