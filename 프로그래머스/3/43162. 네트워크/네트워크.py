@@ -1,24 +1,22 @@
-# BFS (격자X, 그래프)
 from collections import deque
-
 def solution(n, computers):
     answer = 0
+    dx = [1,-1,0,0]
+    dy = [0,0,1,-1]
     visit = [False] * n
     
     for i in range(n):
         if visit[i]:
             continue
-        if computers[i] == 0:
-            continue
-        q = deque([i])
+        
+        q = deque([(i)])
         visit[i] = True
+        answer += 1
         
         while q:
-            u = q.pop()
-            for v in range(n):
-                if visit[v] != True and computers[u][v]:
-                    q.append(v)
-                    visit[v] = True
-        answer += 1
-
+            computer = q.popleft()
+            for i in range(n):
+                if not visit[i] and computers[computer][i]:
+                    q.append(i)
+                    visit[i] = True
     return answer
