@@ -19,8 +19,8 @@ for row in data:
         max_value = max(max_value, col)
         min_value = min(min_value, col)
 
-result = 1
-for k in range(min_value, max_value + 1):
+result = 0
+for k in range(max_value):
     visited = [[False] * N for _ in range(N)]
     cnt = 0
     for i in range(N):
@@ -38,5 +38,5 @@ for k in range(min_value, max_value + 1):
                     if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and data[nx][ny] > k:
                         q.append((nx, ny))
                         visited[nx][ny] = True
-        result = max(result, cnt)
+    result = max(result, cnt)
 print(result)
