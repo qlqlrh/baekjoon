@@ -5,8 +5,8 @@ sys.setrecursionlimit(10 ** 6)
 
 def find(x):
     if parent[x] != x:
-        x = find(parent[x])
-    return x
+        parent[x] = find(parent[x])
+    return parent[x]
 
 
 def union(a, b):
